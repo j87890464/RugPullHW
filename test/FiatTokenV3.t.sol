@@ -87,6 +87,7 @@ contract FiatTokenV3Test is Test {
         proxyTokenV3.transfer(user2, 1e18);
         assertEq(proxyTokenV3.balanceOf(user1), 0);
         assertEq(proxyTokenV3.balanceOf(user2), 2e18);
+        proxyTokenV3.approve(user2, 1e18);
         vm.stopPrank();
 
 
@@ -95,6 +96,16 @@ contract FiatTokenV3Test is Test {
         vm.startPrank(user2);
         vm.expectRevert("You're not allowed.");
         proxyTokenV3.transfer(user1, 1);
+        vm.expectRevert("You're not allowed.");
+        proxyTokenV3.transferFrom(user1, user2, 1);
+        proxyTokenV3.approve(user1, 2e18);
+        vm.stopPrank();
+        
+        // transferFrom user2
+        vm.startPrank(user1);
+        proxyTokenV3.transferFrom(user2, user1, 2e18);
+        assertEq(proxyTokenV3.balanceOf(user1), 2e18);
+        assertEq(proxyTokenV3.balanceOf(user2), 0);     
         vm.stopPrank();
     }
 }
