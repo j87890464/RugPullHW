@@ -7,10 +7,12 @@
 ```shell
 $ forge build
 ```
+### Setting
+Set RPC_MAINNET environment variable in .env file. It must be done before test FiatTokenV3Test.
 
 ### Test
 
-Test entire weth test cases
+Test entire test cases
 ```shell
 $ forge test --mc TradingCenterTest
 $ forge test --mc FiatTokenV3Test

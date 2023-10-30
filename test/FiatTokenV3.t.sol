@@ -19,9 +19,12 @@ contract FiatTokenV3Test is Test {
     }
 
     function setUp() public {
+        // USDC proxy contract
         proxyAddr = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
+        // USDC proxy contract owner
         usdcOwner = 0x807a96288A1A408dBC13DE2b1d087d10356395d2;
-        mainNetFork = vm.createFork("https://eth-mainnet.g.alchemy.com/v2/m7LbPe3kwBUpSj58tnhQjl4bU--Fms-M");
+        string memory mainnetUrl = vm.rpcUrl("mainnet");
+        mainNetFork = vm.createFork(mainnetUrl);
         vm.selectFork(mainNetFork);
         user1 = makeAddr("user1");
         user2 = makeAddr("user2");
